@@ -44,5 +44,5 @@ public class PostController {
 		}
 		return "/post/update";
 	}
-
+//시큐리티 저장완료
 }
