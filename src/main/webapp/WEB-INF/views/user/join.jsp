@@ -16,39 +16,8 @@
 	<button id="join--submit" class="btn btn-primary" style="opacity: 0.7">회원가입</button>
 </div>
 
-<script>
-	$('#join--submit').on('click', function() {
-		
-		var data = {
-			username:$('#username').val(),
-			password:$('#password').val(),
-			email:$('#email').val()
-		};
-		
-		$.ajax({
-			type: 'POST',
-			url: '/user/join',
-			data: JSON.stringify(data),
-			contentType: 'application/json; charset=utf-8',
-			dataType :'json'
-			}).done(function(r){
-				console.log(r);
-				if(r.statusCode==200) {
-					alert('회원가입 성공');
-					location.href='/user/join';
-				} else {
-					
-				if(r.msg=='아이디 중복'){
-					alert('아이디가 중복되었습니다');
-				}else {
-					alert('회원가입 실패');
-				}
-			}
-			}).fail(function(r){
-				alert('회원가입 실패');
-				});
-		});
-
+<script src="/js/join.js">
+	
 </script>
 
 
