@@ -1,6 +1,8 @@
 package com.cos.blog.controller;
 
 import java.util.HashMap;
+
+// 릴리즈 컨트롤러
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
