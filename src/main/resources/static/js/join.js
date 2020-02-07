@@ -32,3 +32,13 @@ $('#join--submit').on('click', function() {
 		alert('회원가입 실패');
 	});
 });
+
+$("#join--submit").keydown(function(key) {
+
+	if (key.keyCode == 13) {
+		$("#join--submit").onclick();
+	
+	}
+
+});
+

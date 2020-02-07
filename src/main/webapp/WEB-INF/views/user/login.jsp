@@ -11,7 +11,7 @@
 			<label for="password">패스워드</label> <input type="password" class="form-control" placeholder="Enter password" id="password">
 		</div>
 	</form>
-	<button id="login--submit" class="btn btn-primary" style="opacity: 0.7">회원가입</button>
+	<button id="login--submit" class="btn btn-primary" style="opacity: 0.7" >로그인</button>
 </div>
 
 <script>
@@ -34,6 +34,7 @@
 			alert("로그인 실패");
 		})
 	});
+
 </script>
 
 <%@include file="../include/footer.jsp"%>

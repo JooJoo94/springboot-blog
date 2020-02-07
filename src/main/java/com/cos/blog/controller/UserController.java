@@ -56,15 +56,11 @@ public class UserController {
 	public String profile(@PathVariable int id) {
 
 		User principal = (User) session.getAttribute("principal");
-		if (principal != null) {
-			if (principal.getId() == id) {
-				return "/user/profile";
-			} else {
-				// 잘못된 접근입니다. 권한이 없습니다.
-				return "/user/login";
-			}
+		
+		if (principal.getId() == id) {
+			return "/user/profile";
 		} else {
-			// 인증되지 않은 사용자입니다. 로그인해주세d\요
+			// 잘못된 접근입니다. 권한이 없습니다.
 			return "/user/login";
 		}
 	}
@@ -76,7 +72,6 @@ public class UserController {
 	@PostMapping("/user/join")
 	public ResponseEntity<?> join(@Valid @RequestBody ReqJoinDto dto, BindingResult bindingResult) {
 		// System.out.println(dto);
-		System.out.println(bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -88,7 +83,6 @@ public class UserController {
 		}
 
 		int result = userService.회원가입(dto);
-		System.out.println("result =" + result);
 
 		if (result == -2) {
 			return new ResponseEntity<RespCM>(new RespCM(ReturnCode.아이디중복, "아이디중복"), HttpStatus.OK);
