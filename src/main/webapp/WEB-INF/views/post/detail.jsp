@@ -4,15 +4,17 @@
 <div class="container">
 	<div class="card">
 		<div class="card-header">
-			<h4 class="cart-title">제목</h4>
+			<h4 class="cart-title">${post.title}</h4>
 		</div>
 	</div>
 	<div class="card-body">
-		<p class="card-text">내용</p>
+		<p class="card-text">${post.content}</p>
 	</div>
 	<div class="card-footer">
-		<button id="post--update--submit" class="btn btn-warning">수정</button>
-		<button id="post--delete--submit" class="btn btn-danger">삭제</button>
+		<c:if test="${sessionScope.principal.id eq post.userId}">
+			<a href="/post/update/${post.id}" class="btn btn-warning">수정</a>
+			<button id="post--delete--submit" class="btn btn-danger" value="${post.id}">삭제</button>
+		</c:if>
 		<a href="/" class="btn btn-primary">목록</a>
 	</div>
 	<br />
@@ -27,8 +29,8 @@
 			</div>
 		</div>
 	</div>
-	<br/>
-	
+	<br />
+
 	<div class="card">
 		<div class="form-group">
 			<div class="card-header">
@@ -36,19 +38,38 @@
 			</div>
 			<div class="comment--items card-body">
 				<div class="comment-item">
-					<span class="comment--content">댓글 내용</span>
+					<span class="comment--content">댓글 내용</span> 
 					<span id="comment--delete--submit" value="1">X</span>
 				</div>
 
 				<div class="comment-item">
-					<span class="comment--content">댓글 내용</span>
-					<span id="comment--delete--submit" value="2" >X</span>
+					<span class="comment--content">댓글 내용</span> 
+					<span id="comment--delete--submit" value="2">X</span>
 				</div>
-			
+
+			</div>
 		</div>
 	</div>
 </div>
-</div>
+<script>
+	$('#post--delete--submit').on('click', function() {
+		var id = $('#post--delete--submit').val();
+		$.ajax({
+			type : 'DELETE',
+			url : '/post/delete/' + id,
+			dataType : 'json'
+		}).done(function(r) {
+			if (r.statusCode = 200) {
+				alert('삭제 성공');
+				location.href = '/';
+			} else {
+				alert('삭제 실패');
+			}
+		}).fail(function(r) {
+			alert('삭제 실패');
+		});
+	});
+</script>
 
 
 <%@include file="../include/footer.jsp"%>
